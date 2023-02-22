@@ -1,0 +1,237 @@
+// reset ==================================================
+html, body, div, span, iframe,
+h1, h2, h3, h4, h5, h6, p,
+a, img, i, ul, li, form, label, input,
+article, aside, canvas, footer, header,
+menu, nav, section, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+html, body, #app {
+  width: 100%;
+  height: 100%;
+  line-height: 1;
+  font-family: Microsoft YaHei, Arial;
+}
+#app {
+  overflow: auto;
+}
+ul {
+  list-style: none;
+}
+
+i {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+// variables ==================================================
+$primary: rgb(127, 118, 118);
+$danger: #dc3545;
+$secondary: rgb(254, 248, 248);
+
+$height: 40px;
+
+// ==================================================
+@mixin xxl{
+  @media(max-width: 1400px){@content;}
+}
+@mixin xl{
+  @media(max-width: 1200px){@content;}
+}
+@mixin l{
+  @media(max-width: 992px){@content;}
+}
+@mixin m{
+  @media(max-width: 767px){@content;}
+}
+@mixin s{
+  @media(max-width: 480px){@content;}
+}
+@mixin xs{
+  @media(max-width: 320px){@content;}
+}
+
+// ==================================================
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+::-webkit-scrollbar-thumb {
+  background: $primary;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+
+//
+.ml_5 {
+  margin-left: 5px;
+}
+
+.mt_5 {
+  margin-top: 5px;
+}
+.mt_20 {
+  margin-top: 20px;
+}
+
+//
+.flex {
+  display: flex;
+
+  &.flex_column {
+    flex-direction: column;
+  }
+  &.justify_content_center {
+    justify-content: center;
+  }
+  &.align_items_center {
+    align-items: center;
+  }
+}
+
+//
+@mixin btn_bg ($bg: $primary, $color: #fff) {
+  background: $bg;
+  color: $color;
+
+  a {
+    color: $color;
+  }
+
+  &:hover {
+    background: darken($bg, 10%);
+  }
+
+  &.disabled {
+    background: $bg;
+    opacity: 0.4;
+    cursor: no-drop;
+  }
+}
+@mixin border {
+  border: 1px solid $primary;
+  @include btn_bg($secondary, $primary);
+
+  &:hover {
+    background: lighten($primary, 10%);
+    color: #fff;
+
+    a {
+      color: #fff;
+    }
+  }
+}
+
+.button {
+  height: $height;
+  line-height: $height;
+  text-align: center;
+  padding: 0 15px;
+  transition: .3s;
+  cursor: pointer;
+  @include btn_bg;
+
+  &.border {
+    @include border
+  }
+}
+
+// 
+.checkbox_container {
+  height: $height;
+  padding: 0 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+
+  input {
+    width: $height * 0.4;
+    height: $height * 0.4;
+    position: relative;
+    cursor: pointer;
+
+    &:checked {
+      &:after {
+        display: block;
+      }
+    }
+
+    &:before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: lighten($primary, 40%);
+    }
+    &:after {
+      content: '';
+      width: 70%;
+      height: 70%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: $primary;
+      display: none;
+    }
+  }
+
+  label {
+    height: 100%;
+    padding: 0 10px;
+    display: flex;
+    align-items: flex-end;
+    cursor: pointer;
+  }
+
+  .terms_name {
+    color: darken($primary, 10%);
+    text-decoration: underline;
+    transition: .3s;
+    cursor: pointer;
+
+    &:hover {
+      color: darken($primary, 50%);
+    }
+  }
+}
+
+//
+.container {
+  width: 1500px;
+  padding: 20px 0;
+  margin: 0 auto;
+
+  @include xxl {
+    width: 1300px;
+  }
+  @include xl {
+    width: 900px;
+  }
+  @include l {
+    width: 768px;
+  }
+  @include m {
+    width: 95%;
+  }
+}
